@@ -4,11 +4,14 @@
 <meta charset="UTF-8">
 <title>KITA KITA SAJA</title>
 
+<!-- ===== IMPORT FONT ALADIN ===== -->
+<link href="https://fonts.googleapis.com/css2?family=Aladin&display=swap" rel="stylesheet">
+
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.1.1/dist/tesseract.min.js"></script>
 
 <style>
 body{
-  font-family:Aladin;
+  font-family:'Aladin', cursive;
   background-image:url("https://i.pinimg.com/736x/cf/7d/a7/cf7da71ccbf727c78542876cadc13a4e.jpg");
   background-size:cover;
   background-position:center;
@@ -42,14 +45,7 @@ h1{
 .rainbow-text span{
   font-weight:bold;
   display:inline-block;
-}
-
-/* ===== AYAT ALKITAB ===== */
-.verse{
-  margin-bottom:20px;
-  font-size:15px;
-  opacity:0.9;
-  color:white; /* Warna putih tetap */
+  font-family:'Aladin', cursive;
 }
 
 /* ===== TEXTAREA ===== */
@@ -64,6 +60,7 @@ textarea{
   resize:none;
   background:rgba(255,255,255,0.3);
   color:black;
+  font-family: 'Courier New', monospace;
 }
 
 button{
@@ -98,7 +95,7 @@ button:hover{
 
 <h1 class="rainbow-text" id="title-text">KITA KITA SAJA</h1>
 
-<div class="verse" id="verse-text">
+<div class="verse rainbow-text" id="verse-text">
 Percayalah kepada TUHAN dengan segenap hatimu, dan jangan bersandar kepada pengertianmu sendiri. Akuilah Dia dalam segala lakumu, maka Ia akan meluruskan jalanmu.  
 <b>Amsal 3:5-6</b>
 </div>
@@ -129,8 +126,9 @@ function makeRainbow(elementId){
   el.innerHTML = html;
 }
 
-// Terapkan hanya ke judul dan nama bawah
+// Terapkan ke judul, ayat, dan nama bawah
 makeRainbow('title-text');
+makeRainbow('verse-text');
 makeRainbow('footer-name');
 
 /* ===== OCR FUNCTION ===== */
