@@ -73,8 +73,13 @@ button:hover{
   background:#2563eb;
 }
 
-.bg-buttons{
-  margin-top:20px;
+/* ===== TEKS NAMA BAWAH ===== */
+.footer-name{
+  margin-top:30px;
+  font-size:18px;
+  font-weight:bold;
+  letter-spacing:1px;
+  opacity:0.9;
 }
 </style>
 </head>
@@ -96,26 +101,12 @@ Percayalah kepada TUHAN dengan segenap hatimu, dan jangan bersandar kepada penge
 
 <textarea id="result" placeholder="Hasil teks muncul di sini..."></textarea>
 
-<div class="bg-buttons">
-<h3>Pilih Background</h3>
-<button onclick="setBG(1)">Ymy❀</button>
 </div>
 
-</div>
+<!-- ===== NAMA BAWAH ===== -->
+<div class="footer-name">YO MEI YUAN</div>
 
 <script>
-/* ===== LINK BACKGROUND CUSTOM ===== */
-const bgLinks = [
-  "https://i.pinimg.com/736x/cf/7d/a7/cf7da71ccbf727c78542876cadc13a4e.jpg", // Ymy❀
-];
-
-/* ===== SET BACKGROUND DENGAN TOMBOL ===== */
-function setBG(index){
-  if(index>=0 && index<bgLinks.length){
-    document.body.style.backgroundImage = "url('"+bgLinks[index]+"')";
-  }
-}
-
 /* ===== OCR FUNCTION ===== */
 function runOCR(image){
   Tesseract.recognize(
