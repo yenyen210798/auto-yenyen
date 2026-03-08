@@ -79,6 +79,7 @@ button:hover{
   font-size:18px;
   font-weight:bold;
   letter-spacing:1px;
+  opacity:0.9;
 }
 </style>
 </head>
@@ -89,7 +90,7 @@ button:hover{
 
 <h1 class="rainbow-text" id="title-text">KITA KITA SAJA</h1>
 
-<div class="verse">
+<div class="verse" id="verse-text">
 Percayalah kepada TUHAN dengan segenap hatimu, dan jangan bersandar kepada pengertianmu sendiri. Akuilah Dia dalam segala lakumu, maka Ia akan meluruskan jalanmu.  
 <b>Amsal 3:5-6</b>
 </div>
@@ -120,9 +121,8 @@ function makeRainbow(elementId){
   el.innerHTML = html;
 }
 
-// Terapkan ke semua
+// Terapkan ke judul dan nama bawah saja
 makeRainbow('title-text');
-makeRainbow('verse-text');
 makeRainbow('footer-name');
 
 /* ===== OCR FUNCTION ===== */
@@ -135,7 +135,7 @@ function runOCR(image){
     const resultArea = document.getElementById("result");
     resultArea.value = cleaned;
     
-    // Tambahkan efek warna-warni ke hasil OCR
+    // Hasil OCR tetap hitam agar mudah dibaca
     resultArea.style.backgroundColor = "rgba(255,255,255,0.3)";
     resultArea.style.color = "black";
   })
