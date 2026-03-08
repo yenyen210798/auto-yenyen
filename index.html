@@ -21,7 +21,7 @@ body{
 /* ===== PANEL UTAMA GLASS ===== */
 .container{
   max-width:750px;
-  margin:400px auto 0 auto; /* turunkan seluruh panel ke bawah */
+  margin:400px auto 0 auto;
   padding:35px;
   border-radius:15px;
   background: rgba(0,0,0,0.25);
@@ -42,6 +42,14 @@ h1{
 .rainbow-text span{
   font-weight:bold;
   display:inline-block;
+}
+
+/* ===== AYAT ALKITAB ===== */
+.verse{
+  margin-bottom:20px;
+  font-size:15px;
+  opacity:0.9;
+  color:white; /* Warna putih tetap */
 }
 
 /* ===== TEXTAREA ===== */
@@ -111,7 +119,7 @@ Percayalah kepada TUHAN dengan segenap hatimu, dan jangan bersandar kepada penge
 function makeRainbow(elementId){
   const el = document.getElementById(elementId);
   const text = el.innerText;
-  const colors = ['#FF0000','#FF7F00','#FFFF00','#00FF00','#0000FF','#4B0082','#9400D3']; // pelangi
+  const colors = ['#FF0000','#FF7F00','#FFFF00','#00FF00','#0000FF','#4B0082','#9400D3'];
   let html = '';
   for(let i=0; i<text.length; i++){
     const char = text[i];
@@ -121,7 +129,7 @@ function makeRainbow(elementId){
   el.innerHTML = html;
 }
 
-// Terapkan ke judul dan nama bawah saja
+// Terapkan hanya ke judul dan nama bawah
 makeRainbow('title-text');
 makeRainbow('footer-name');
 
@@ -135,7 +143,6 @@ function runOCR(image){
     const resultArea = document.getElementById("result");
     resultArea.value = cleaned;
     
-    // Hasil OCR tetap hitam agar mudah dibaca
     resultArea.style.backgroundColor = "rgba(255,255,255,0.3)";
     resultArea.style.color = "black";
   })
