@@ -42,11 +42,20 @@ body{
   inset 0 0 10px rgba(255,255,255,0.1);
 }
 
-/* JUDUL */
+/* ===== JUDUL BUBBLE ===== */
 h1{
-  margin-bottom:10px;
+  font-size:42px;
   letter-spacing:2px;
-  font-size:32px;
+  margin-bottom:15px;
+  font-family:'Aladin', cursive;
+
+  -webkit-text-stroke:4px white;
+
+  text-shadow:
+  4px 4px 0 #6b7cff,
+  7px 7px 0 rgba(0,0,0,0.25);
+
+  padding:5px 15px;
 }
 
 /* RAINBOW */
@@ -99,7 +108,7 @@ textarea{
   border-radius:10px;
   background:#3b82f6;
   color:white;
-  font-size:18px;
+  font-size:20px;
 
   box-shadow:0 0 10px rgba(59,130,246,0.6);
 }
@@ -124,7 +133,7 @@ textarea{
 
 <div class="container">
 
-<h1 class="rainbow-text" id="title-text">Yo Mei Yuan</h1>
+<h1 class="rainbow-text" id="title-text">YO MEI YUAN</h1>
 
 <div class="verse">
 Percayalah kepada TUHAN dengan segenap hatimu, dan jangan bersandar kepada pengertianmu sendiri. Akuilah Dia dalam segala lakumu, maka Ia akan meluruskan jalanmu.  
@@ -135,7 +144,6 @@ Percayalah kepada TUHAN dengan segenap hatimu, dan jangan bersandar kepada penge
 
 <div class="upload-box">
 <input type="file" id="imageInput">
-
 <button class="copy-btn" onclick="copyText()">📋</button>
 </div>
 
@@ -147,18 +155,31 @@ Percayalah kepada TUHAN dengan segenap hatimu, dan jangan bersandar kepada penge
 
 /* RAINBOW TEXT */
 function makeRainbow(elementId){
-  const el = document.getElementById(elementId);
-  const text = el.innerText;
-  const colors = ['#FF0000','#FF7F00','#FFFF00','#00FF00','#0000FF','#4B0082','#9400D3'];
+
+  const el=document.getElementById(elementId);
+  const text=el.innerText;
+
+  const colors=[
+  '#ff4d6d',
+  '#ff9f1c',
+  '#ffd60a',
+  '#2ec4b6',
+  '#4dabf7',
+  '#845ef7',
+  '#f06595'
+  ];
 
   let html='';
 
   for(let i=0;i<text.length;i++){
+
     const color=colors[i%colors.length];
     html+='<span style="color:'+color+'">'+text[i]+'</span>';
+
   }
 
   el.innerHTML=html;
+
 }
 
 makeRainbow('title-text');
@@ -166,51 +187,56 @@ makeRainbow('footer-name');
 
 /* OCR */
 function runOCR(image){
-  Tesseract.recognize(
-    image,
-    'eng'
-  ).then(({data:{text}})=>{
 
-    let cleaned=text
-      .replace(/\n+/g,"")
-      .replace(/\s+/g,"")
-      .trim();
+Tesseract.recognize(
+image,
+'eng'
+).then(({data:{text}})=>{
 
-    document.getElementById("result").value=cleaned;
-  })
+let cleaned=text
+.replace(/\n+/g,"")
+.replace(/\s+/g,"")
+.trim();
+
+document.getElementById("result").value=cleaned;
+
+})
+
 }
 
 /* UPLOAD */
 document.getElementById('imageInput').addEventListener('change',function(){
-  const file=this.files[0];
-  runOCR(file);
+
+const file=this.files[0];
+runOCR(file);
+
 })
 
 /* PASTE SCREENSHOT */
 document.addEventListener('paste',function(event){
 
-  const items=event.clipboardData.items;
+const items=event.clipboardData.items;
 
-  for(let i=0;i<items.length;i++){
+for(let i=0;i<items.length;i++){
 
-    if(items[i].type.indexOf("image")!==-1){
+if(items[i].type.indexOf("image")!==-1){
 
-      const blob=items[i].getAsFile();
-      runOCR(blob);
+const blob=items[i].getAsFile();
+runOCR(blob);
 
-    }
+}
 
-  }
+}
 
 })
 
 /* COPY */
 function copyText(){
 
-  const textarea=document.getElementById("result");
+const textarea=document.getElementById("result");
 
-  textarea.select();
-  document.execCommand("copy");
+textarea.select();
+document.execCommand("copy");
 
 }
 
