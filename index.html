@@ -23,6 +23,9 @@ margin:0;
 /* PANEL */
 
 .container{
+position:relative;
+overflow:hidden;
+
 max-width:750px;
 margin:400px auto 0 auto;
 padding:35px;
@@ -43,14 +46,53 @@ box-shadow:
 inset 0 0 10px rgba(255,255,255,0.1);
 }
 
-/* ===== TITLE ===== */
+/* SPARKLE AREA */
 
-.title-wrapper{
-position:relative;
-display:inline-block;
+.sparkle-area{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
 }
 
-/* TITLE TEXT */
+/* SPARKLE */
+
+.sparkle{
+position:absolute;
+color:white;
+font-size:18px;
+
+text-shadow:
+0 0 5px #fff,
+0 0 10px #a5b4fc,
+0 0 20px #818cf8,
+0 0 30px #6366f1;
+
+animation:twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+
+0%{
+opacity:0.2;
+transform:scale(0.6);
+}
+
+50%{
+opacity:1;
+transform:scale(1.3);
+}
+
+100%{
+opacity:0.3;
+transform:scale(0.7);
+}
+
+}
+
+/* TITLE */
 
 h1{
 
@@ -68,68 +110,6 @@ text-shadow:
 0 0 8px rgba(120,160,255,0.8),
 0 0 16px rgba(170,130,255,0.7),
 4px 4px 0 rgba(0,0,0,0.25);
-
-}
-
-/* ===== SPARKLE ===== */
-
-.sparkle{
-position:absolute;
-color:white;
-font-size:22px;
-opacity:0.9;
-
-text-shadow:
-0 0 6px #ffffff,
-0 0 12px #a5b4fc,
-0 0 20px #818cf8,
-0 0 30px #6366f1;
-
-animation:sparkle 2s infinite ease-in-out;
-}
-
-/* posisi sparkle */
-
-.sparkle:nth-child(2){
-top:-18px;
-left:-25px;
-animation-delay:0s;
-}
-
-.sparkle:nth-child(3){
-top:-20px;
-right:-25px;
-animation-delay:0.5s;
-}
-
-.sparkle:nth-child(4){
-bottom:-12px;
-left:15px;
-animation-delay:1s;
-}
-
-.sparkle:nth-child(5){
-bottom:-15px;
-right:20px;
-animation-delay:1.5s;
-}
-
-@keyframes sparkle{
-
-0%{
-opacity:0.3;
-transform:scale(0.7) rotate(0deg);
-}
-
-50%{
-opacity:1;
-transform:scale(1.4) rotate(180deg);
-}
-
-100%{
-opacity:0.4;
-transform:scale(0.8) rotate(360deg);
-}
 
 }
 
@@ -228,16 +208,9 @@ color:white;
 
 <div class="container">
 
-<div class="title-wrapper">
+<div class="sparkle-area" id="sparkleArea"></div>
 
 <h1>YO MEI YUAN</h1>
-
-<div class="sparkle">✦</div>
-<div class="sparkle">✧</div>
-<div class="sparkle">✦</div>
-<div class="sparkle">✧</div>
-
-</div>
 
 <div class="verse">
 
@@ -262,6 +235,26 @@ Akuilah Dia dalam segala lakumu, maka Ia akan meluruskan jalanmu.
 <div class="footer-name">YMY</div>
 
 <script>
+
+/* SPARKLE GENERATOR */
+
+const sparkleArea=document.getElementById("sparkleArea");
+
+for(let i=0;i<35;i++){
+
+let star=document.createElement("div");
+
+star.className="sparkle";
+star.innerHTML="✦";
+
+star.style.top=Math.random()*100+"%";
+star.style.left=Math.random()*100+"%";
+
+star.style.animationDelay=Math.random()*3+"s";
+
+sparkleArea.appendChild(star);
+
+}
 
 /* OCR */
 
