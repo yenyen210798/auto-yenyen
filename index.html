@@ -10,6 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.1.1/dist/tesseract.min.js"></script>
 
 <style>
+
 body{
   font-family:'Aladin', cursive;
   background-image:url("https://i.pinimg.com/736x/cf/7d/a7/cf7da71ccbf727c78542876cadc13a4e.jpg");
@@ -21,18 +22,35 @@ body{
   margin:0;
 }
 
-/* ===== PANEL UTAMA GLASS ===== */
+/* ===== PANEL UTAMA PRO ===== */
 .container{
   max-width:750px;
   margin:400px auto 0 auto;
   padding:35px;
-  border-radius:15px;
-  background: rgba(0,0,0,0.25);
-  backdrop-filter:blur(10px);
+  border-radius:18px;
+
+  background:rgba(0,0,0,0.30);
+  backdrop-filter:blur(12px);
+
+  border:1px solid rgba(255,255,255,0.25);
+
   display:flex;
   flex-direction:column;
   align-items:center;
-  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+
+  box-shadow:
+  0 0 15px rgba(59,130,246,0.6),
+  0 10px 30px rgba(0,0,0,0.6),
+  inset 0 0 10px rgba(255,255,255,0.1);
+
+  transition:0.4s;
+}
+
+.container:hover{
+  box-shadow:
+  0 0 25px rgba(59,130,246,0.9),
+  0 15px 40px rgba(0,0,0,0.7),
+  inset 0 0 12px rgba(255,255,255,0.15);
 }
 
 h1{
@@ -53,7 +71,7 @@ h1{
   margin-bottom:20px;
   font-size:15px;
   opacity:0.9;
-  color:white; /* tetap putih */
+  color:white;
   font-family:'Aladin', cursive;
 }
 
@@ -64,14 +82,20 @@ textarea{
   margin-top:20px;
   font-size:16px;
   padding:10px;
-  border-radius:8px;
+  border-radius:10px;
   border:none;
   resize:none;
-  background:rgba(255,255,255,0.3);
+
+  background:rgba(255,255,255,0.35);
+  backdrop-filter:blur(5px);
+
   color:black;
-  font-family: 'Courier New', monospace;
+  font-family:'Courier New', monospace;
+
+  box-shadow:0 0 10px rgba(59,130,246,0.3);
 }
 
+/* ===== BUTTON ===== */
 button{
   padding:10px 25px;
   margin-top:15px;
@@ -81,10 +105,20 @@ button{
   background:#3b82f6;
   color:white;
   margin:3px;
+  font-family:'Aladin', cursive;
+
+  box-shadow:0 0 10px rgba(59,130,246,0.5);
 }
 
 button:hover{
   background:#2563eb;
+  box-shadow:0 0 18px rgba(59,130,246,0.9);
+}
+
+/* ===== FILE INPUT ===== */
+input[type="file"]{
+  margin-top:10px;
+  color:white;
 }
 
 /* ===== NAMA BAWAH ===== */
@@ -95,6 +129,7 @@ button:hover{
   letter-spacing:1px;
   opacity:0.9;
 }
+
 </style>
 </head>
 
@@ -111,31 +146,33 @@ Percayalah kepada TUHAN dengan segenap hatimu, dan jangan bersandar kepada penge
 
 <input type="file" id="imageInput">
 <br>
+
 <button onclick="copyText()">Copy Text</button>
 
 <textarea id="result" placeholder="Sini Guyssss hehehe"></textarea>
 
 </div>
 
-<!-- ===== NAMA BAWAH ===== -->
 <div class="footer-name rainbow-text" id="footer-name">YMY</div>
 
 <script>
-/* ===== WARNA-WARNI SETIAP HURUF ===== */
+
+/* ===== WARNA-WARNI HURUF ===== */
 function makeRainbow(elementId){
   const el = document.getElementById(elementId);
   const text = el.innerText;
   const colors = ['#FF0000','#FF7F00','#FFFF00','#00FF00','#0000FF','#4B0082','#9400D3'];
   let html = '';
-  for(let i=0; i<text.length; i++){
+  
+  for(let i=0;i<text.length;i++){
     const char = text[i];
     const color = colors[i % colors.length];
     html += '<span style="color:'+color+'">'+char+'</span>';
   }
+
   el.innerHTML = html;
 }
 
-// Terapkan ke judul dan nama bawah saja
 makeRainbow('title-text');
 makeRainbow('footer-name');
 
@@ -145,11 +182,16 @@ function runOCR(image){
     image,
     'eng'
   ).then(({ data: { text } }) => {
-    let cleaned = text.replace(/\n+/g,"").replace(/\s+/g,"").trim();
+
+    let cleaned = text
+      .replace(/\n+/g,"")
+      .replace(/\s+/g,"")
+      .trim();
+
     const resultArea = document.getElementById("result");
+
     resultArea.value = cleaned;
-    
-    resultArea.style.backgroundColor = "rgba(255,255,255,0.3)";
+    resultArea.style.backgroundColor = "rgba(255,255,255,0.35)";
     resultArea.style.color = "black";
   })
 }
@@ -162,13 +204,20 @@ document.getElementById('imageInput').addEventListener('change',function(){
 
 /* ===== PASTE SCREENSHOT ===== */
 document.addEventListener('paste',function(event){
+
   const items = event.clipboardData.items;
+
   for (let i = 0; i < items.length; i++) {
+
     if (items[i].type.indexOf("image") !== -1) {
+
       const blob = items[i].getAsFile();
       runOCR(blob);
+
     }
+
   }
+
 })
 
 /* ===== COPY TEXT ===== */
@@ -177,6 +226,7 @@ function copyText(){
   textarea.select();
   document.execCommand("copy");
 }
+
 </script>
 
 </body>
