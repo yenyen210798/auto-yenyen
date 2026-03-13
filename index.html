@@ -46,7 +46,7 @@ box-shadow:
 inset 0 0 10px rgba(255,255,255,0.1);
 }
 
-/* SPARKLE AREA */
+/* SPARKLE */
 
 .sparkle-area{
 position:absolute;
@@ -56,8 +56,6 @@ width:100%;
 height:100%;
 pointer-events:none;
 }
-
-/* SPARKLE */
 
 .sparkle{
 position:absolute;
@@ -75,41 +73,42 @@ animation:twinkle 3s infinite ease-in-out;
 
 @keyframes twinkle{
 
-0%{
-opacity:0.2;
-transform:scale(0.6);
-}
-
-50%{
-opacity:1;
-transform:scale(1.3);
-}
-
-100%{
-opacity:0.3;
-transform:scale(0.7);
-}
+0%{opacity:0.2;transform:scale(0.6);}
+50%{opacity:1;transform:scale(1.3);}
+100%{opacity:0.3;transform:scale(0.7);}
 
 }
 
-/* TITLE */
+/* ===== GRAFFITI TITLE ===== */
 
-h1{
+.title-box{
+position:relative;
+width:420px;
+margin-bottom:20px;
+}
+
+.title-box img{
+width:100%;
+}
+
+.title-text{
+
+position:absolute;
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%);
 
 font-size:48px;
-letter-spacing:3px;
-margin-bottom:20px;
+color:white;
 
-background:linear-gradient(45deg,#7fb3ff,#a78bfa,#d8b4fe);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-
--webkit-text-stroke:2px white;
+-webkit-text-stroke:4px #ff2d8f;
 
 text-shadow:
-0 0 8px rgba(120,160,255,0.8),
-0 0 16px rgba(170,130,255,0.7),
-4px 4px 0 rgba(0,0,0,0.25);
+3px 3px 0 #000,
+0 0 10px rgba(255,255,255,0.6);
+
+letter-spacing:3px;
 
 }
 
@@ -184,7 +183,6 @@ box-shadow:0 0 10px rgba(59,130,246,0.6);
 .copy-btn:hover{
 
 background:#2563eb;
-
 box-shadow:0 0 18px rgba(59,130,246,0.9);
 
 }
@@ -210,7 +208,17 @@ color:white;
 
 <div class="sparkle-area" id="sparkleArea"></div>
 
-<h1>YO MEI YUAN</h1>
+<!-- GRAFFITI TITLE -->
+
+<div class="title-box">
+
+<img src="https://i.imgur.com/3sK2UeC.png">
+
+<div class="title-text">
+YO MEI YUAN
+</div>
+
+</div>
 
 <div class="verse">
 
@@ -236,7 +244,7 @@ Akuilah Dia dalam segala lakumu, maka Ia akan meluruskan jalanmu.
 
 <script>
 
-/* SPARKLE GENERATOR */
+/* SPARKLE */
 
 const sparkleArea=document.getElementById("sparkleArea");
 
